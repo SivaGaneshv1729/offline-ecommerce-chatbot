@@ -5,28 +5,28 @@ import os
 OLLAMA_ENDPOINT = "http://localhost:11434/api/generate"
 MODEL_NAME = "llama3.2:3b"
 
-# 20 adapted e-commerce queries
+# 20 adapted e-commerce queries from technical support scenarios
 QUERIES = [
-    "My discount code is not working at checkout.",
-    "How do I track the shipping status of my recent order?",
-    "Do you offer international shipping to Europe?",
-    "Can I change my shipping address after placing an order?",
-    "What is your return policy for sale items?",
-    "I received a damaged item, how do I get a replacement?",
-    "How can I cancel my order?",
-    "Are your products ethically sourced?",
-    "Do you have a size guide for your clothing?",
-    "How do I reset my account password?",
-    "What payment methods do you accept?",
-    "Can I combine two separate orders to save on shipping?",
-    "Is there a physical store where I can try on clothes?",
-    "How long does standard shipping usually take?",
-    "Do you offer gift wrapping services?",
-    "Why was my payment declined?",
-    "Are the colors on the website accurate to the real product?",
-    "Can I pre-order items that are coming soon?",
-    "How do I sign up for your newsletter for discounts?",
-    "Is my personal information secure with you?"
+    "How do I create an account on your store?", # Adapt: How to install Ubuntu?
+    "My discount code is not working at checkout.", # Adapt: My wifi is not connecting.
+    "How do I reset my account password?", # Adapt: How to reset root password?
+    "Where can I find my order invoice?", # Adapt: Where are the log files?
+    "Is your mobile app available on iOS?", # Adapt: Can I run this on Mac?
+    "How do I update my shipping address?", # Adapt: How to update the kernel?
+    "I'm getting an 'out of stock' error for items in my cart.", # Adapt: Unmet dependencies error.
+    "How do I return a purchased item?", # Adapt: How to uninstall package?
+    "My payment was declined during checkout.", # Adapt: Permission denied error.
+    "How do I change the currency on the website?", # Adapt: How to change timezone?
+    "Is there a physical store where I can visit?", # Adapt: Is there a GUI for this?
+    "The product images are not loading correctly.", # Adapt: Screen resolution is wrong.
+    "How do I save items to my wishlist?", # Adapt: How to backup my files?
+    "When will the new summer collection be released?", # Adapt: What is the latest version?
+    "How do I reach customer support?", # Adapt: How to contact the dev team?
+    "Can I share my referral link with friends?", # Adapt: Can I share my desktop?
+    "How do I enable SMS notifications for my order?", # Adapt: How to enable ssh?
+    "Why is my shipping taking longer than expected?", # Adapt: Performance is slow.
+    "How do I delete my account and data?", # Adapt: How to format a drive?
+    "Are your products ethically sourced?" # Adapt: Is this open source?
 ]
 
 def query_ollama(prompt):
