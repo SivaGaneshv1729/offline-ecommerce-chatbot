@@ -4,7 +4,8 @@ import os
 import sys
 
 # Configuration
-OLLAMA_ENDPOINT = "http://localhost:11434/api/generate"
+OLLAMA_HOST = os.getenv("OLLAMA_HOST", "http://localhost:11434")
+OLLAMA_ENDPOINT = f"{OLLAMA_HOST}/api/generate"
 MODEL_NAME = "llama3.2:3b"
 RESULTS_DIR = 'eval'
 RESULTS_FILE = os.path.join(RESULTS_DIR, 'results.md')
@@ -41,7 +42,8 @@ def query_ollama(prompt):
         "stream": False
     }
     try:
-        response = requests.post(OLLAMA_ENDPOINT, json=payload, timeout=30)
+        # Increased timeout to 90s to handle potentially slow local CPU inference
+        response = requests.post(OLLAMA_ENDPOINT, json=payload, timeout=90)
         response.raise_for_status()
         return response.json().get("response", "").strip()
     except requests.exceptions.RequestException as e:
