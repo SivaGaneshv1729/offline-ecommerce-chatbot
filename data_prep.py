@@ -1,23 +1,32 @@
+from datasets import random
 from datasets import load_dataset
-import random
 
 def main():
-    print("Loading Ubuntu Dialogue Corpus...")
-    # Using a small subset or specific split if available, otherwise just loading train
+    """
+    Loads the Ubuntu Dialogue dataset and samples 20 technical queries for adaptation.
+    NOTE: Using 'sedthh/ubuntu_dialogue_qa' as 'rguo12/ubuntu_dialogue_corpus' is currently unavailable.
+    """
+    print("Loading dataset 'sedthh/ubuntu_dialogue_qa'...")
     try:
-        dataset = load_dataset("sedthh/ubuntu_dialogue_qa", split='train', trust_remote_code=True)
-        print(f"Dataset loaded. Total rows: {len(dataset)}")
+        # Load the alternate dataset split
+        dataset = load_dataset("sedthh/ubuntu_dialogue_qa", split="train")
+        
+        # We are interested in the 'train' split which contains the dialogues
+        train_data = dataset
         
         # Sample 20 technical queries
-        samples = random.sample(list(dataset), 20) 
+        indices = random.sample(range(len(train_data)), 20)
+        samples = [train_data[i] for i in indices]
+
+        print("\n--- Technical Queries for Adaptation ---")
+        with open("samples.txt", "w", encoding="utf-8") as f:
+            for i, sample in enumerate(samples, 1):
+                # Column name might vary; 'question' covers most cases in this subset
+                query = sample.get('question', sample.get('text', 'N/A'))
+                print(f"{i}. {query}")
+                f.write(f"{i}. {query}\n")
         
-        print("\n--- SAMPLE TECHNICAL QUERIES ---")
-        for i, s in enumerate(samples, 1):
-            # Checking for 'question' or similar keys
-            query = s.get('question', s.get('utterance', s.get('Context', 'N/A')))
-            print(f"{i}. Technical: {query[:150]}")
-            print("-" * 20)
-            
+        print("\nSamples saved to 'samples.txt'.")
     except Exception as e:
         print(f"Error: {e}")
 
