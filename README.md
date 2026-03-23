@@ -34,7 +34,6 @@ graph TD
 ## 🎯 Core Technical Features
 - **Prompt Engineering Excellence**: Systematic comparison of **Zero-Shot** vs. **One-Shot** prompting strategies to optimize response tone and persona alignment.
 - **Robust Inference Engine**: A custom Python client featuring 90-second request timeouts, automated status code verification, and graceful error handling.
-- **Containerized Deployment**: Ready-to-use **Docker** support for seamless client deployment across various environments.
 - **Manual Evaluation Framework**: A dedicated 3-axis scoring methodology (Relevance, Coherence, Helpfulness) for precise model calibration.
 
 ---
@@ -59,7 +58,6 @@ offline-chatbot/
 ├── eval/              # Raw Inference Logs and Human Scores
 ├── chatbot.py         # Main Orchestration Engine
 ├── data_prep.py       # Technical Dataset Adaptation Script
-├── Dockerfile         # Container Configuration
 ├── report.md          # Comprehensive Performance Analysis
 ├── setup.md           # Deployment Instructions
 └── README.md          # Project Specification
@@ -68,11 +66,12 @@ offline-chatbot/
 ---
 
 ## 🚀 Quick Start
-To get started, please follow the detailed steps in [**setup.md**](setup.md).
+To get started, follow these steps or see [**setup.md**](setup.md) for full details.
 
 1. **Install Ollama** and pull the model: `ollama pull llama3.2:3b`.
-2. **Setup virtual environment** and install dependencies: `pip install -r requirements.txt`.
-3. **Execute the client**: `python chatbot.py`.
+2. **Setup virtual environment**: `python -m venv venv && .\venv\Scripts\activate`.
+3. **Install dependencies**: `pip install -r requirements.txt`.
+4. **Execute the client**: `python chatbot.py`.
 
 ---
 

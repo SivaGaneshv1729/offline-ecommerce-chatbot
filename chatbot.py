@@ -4,8 +4,7 @@ import os
 import sys
 
 # Configuration
-OLLAMA_HOST = os.getenv("OLLAMA_HOST", "http://localhost:11434")
-OLLAMA_ENDPOINT = f"{OLLAMA_HOST}/api/generate"
+OLLAMA_ENDPOINT = "http://localhost:11434/api/generate"
 MODEL_NAME = "llama3.2:3b"
 RESULTS_DIR = 'eval'
 RESULTS_FILE = os.path.join(RESULTS_DIR, 'results.md')
