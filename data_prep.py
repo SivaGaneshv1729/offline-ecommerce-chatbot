@@ -1,29 +1,28 @@
-from datasets import random
+import random
 from datasets import load_dataset
 
 def main():
     """
     Loads the Ubuntu Dialogue dataset and samples 20 technical queries for adaptation.
-    NOTE: Using 'sedthh/ubuntu_dialogue_qa' as 'rguo12/ubuntu_dialogue_corpus' is currently unavailable.
+    Uses 'ntcuong777/ubuntu_dialogue_corpus_train' as a stable alternative.
     """
-    print("Loading dataset 'sedthh/ubuntu_dialogue_qa'...")
+    print("Loading dataset 'ntcuong777/ubuntu_dialogue_corpus_train'...")
     try:
-        # Load the alternate dataset split
-        dataset = load_dataset("sedthh/ubuntu_dialogue_qa", split="train")
+        # Load the stable dataset split
+        dataset = load_dataset("ntcuong777/ubuntu_dialogue_corpus_train", split="train")
         
-        # We are interested in the 'train' split which contains the dialogues
-        train_data = dataset
-        
-        # Sample 20 technical queries
-        indices = random.sample(range(len(train_data)), 20)
-        samples = [train_data[i] for i in indices]
+        # We sample 20 technical queries
+        indices = random.sample(range(len(dataset)), 20)
+        samples = [dataset[i] for i in indices]
 
         print("\n--- Technical Queries for Adaptation ---")
         with open("samples.txt", "w", encoding="utf-8") as f:
             for i, sample in enumerate(samples, 1):
-                # Column name might vary; 'question' covers most cases in this subset
-                query = sample.get('question', sample.get('text', 'N/A'))
-                print(f"{i}. {query}")
+                # Using 'Context' as it contains the technical query/prompt
+                query = sample.get('Context', sample.get('Utterance', 'N/A'))
+                # Clean up multiple '__EOS__' tags if present for better readability
+                query = query.replace('__EOS__', ' | ').strip()
+                print(f"{i}. {query[:100]}...") # Print a preview
                 f.write(f"{i}. {query}\n")
         
         print("\nSamples saved to 'samples.txt'.")
